@@ -10,7 +10,7 @@
     <body>
         <h1>This is Mongorian</h1>
         <p>Create New Collection by MongoDB When you Upload CSV File</p>
-        <form method="post" action="mongorian_laravel/public/index.php/getData" enctype="multipart/form-data">
+        <form method="post" action="/getData" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div>
                 <input type="file" name="csvFile">
