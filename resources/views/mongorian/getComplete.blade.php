@@ -10,13 +10,13 @@
     <body>
         <h1>This is Mongorian</h1>
         <p>Create New Collection by MongoDB When you Upload CSV File</p>
-        
-<!--
+
+
         @foreach ($rows as $row)
             {{$row}}
         @endforeach
--->
-        
+
+
         <form method="post" action="getData" enctype="multipart/form-data">
             <div>
                 <input type="file" name="csvFile">
