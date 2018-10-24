@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+
+
 class GetDataController extends Controller
 {
     public function get(Request $request){
@@ -16,7 +21,7 @@ $bulk = new MongoDB\Driver\BulkWrite;
 if(is_uploaded_file($_FILES["csvFile"]["tmp_name"])){
     $file_tmp_name = $_FILES["csvFile"]["tmp_name"];
     $file_name = $_FILES["csvFile"]["name"];
-    
+
     if(pathinfo($file_name, PATHINFO_EXTENSION) != 'csv'){
         $err_msg = 'CSVファイルのみ対応しています。';
     }else{
@@ -24,7 +29,7 @@ if(is_uploaded_file($_FILES["csvFile"]["tmp_name"])){
         if(move_uploaded_file($file_tmp_name, "csvFiles/" . $file_name)){
             $file = "csvFiles/" .$file_name;
             $fp = fopen($file, "r");
-            
+
             //配列に変換する
             $isLoadFirstRow = false;
             $firstRowColumnNum = 0;

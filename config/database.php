@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'mongodb'),
 
     /*
     |--------------------------------------------------------------------------
@@ -76,6 +76,15 @@ return [
             'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
             'prefix' => '',
+        ],
+
+        'connections' => [
+          'mongodb' => [
+          'driver' => 'mongodb',
+          'host' => env('DB_HOST', 'localhost'),
+          'port' => env('DB_PORT', 27017),
+          'database' => env('DB_DATABASE', 'testDB'),
+          ],
         ],
 
     ],
