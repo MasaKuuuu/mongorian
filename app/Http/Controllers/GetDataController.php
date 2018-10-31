@@ -7,16 +7,11 @@ use Illuminate\Http\Request;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
-
+use App\Models\CsvData;
 
 class GetDataController extends Controller
 {
     public function get(Request $request){
-        // DB接続
-$manager = new MongoDB\Driver\Manager("mongodb://127.0.0.1:27017");
-
-// Insert
-$bulk = new MongoDB\Driver\BulkWrite;
 
 if(is_uploaded_file($_FILES["csvFile"]["tmp_name"])){
     $file_tmp_name = $_FILES["csvFile"]["tmp_name"];
@@ -26,8 +21,8 @@ if(is_uploaded_file($_FILES["csvFile"]["tmp_name"])){
         $err_msg = 'CSVファイルのみ対応しています。';
     }else{
         //ファイルをdataディレクトリに移動
-        if(move_uploaded_file($file_tmp_name, "csvFiles/" . $file_name)){
-            $file = "csvFiles/" .$file_name;
+        if(move_uploaded_file($file_tmp_name, "download/" . $file_name)){
+            $file = "download/" .$file_name;
             $fp = fopen($file, "r");
 
             //配列に変換する
@@ -48,8 +43,9 @@ if(is_uploaded_file($_FILES["csvFile"]["tmp_name"])){
                         }
                     }
                     $asins[] = $csvDataRow;
-                    $bulk->insert($csvDataRow);
-                    $manager->executeBulkWrite('study.test', $bulk);
+                    CsvData::insert($csvDataRow);
+                    // $bulk->insert($csvDataRow);
+                    // $manager->executeBulkWrite('study.test', $bulk);
                 }else{
                     $asins[] = $data;
                     $firstRowColumnData = $data;
@@ -75,13 +71,15 @@ $options = [
   'projection' => ['_id' => 0],
   'sort' => ['_id' => -1],
 ];
-$query = new MongoDB\Driver\Query($filter, $options);
-$cursor = $manager->executeQuery('study.test', $query);
+// $query = new MongoDB\Driver\Query($filter, $options);
+// $cursor = $manager->executeQuery('study.test', $query);
+$rows = CsvData::all();
+
 
 // Select 結果表示
 //foreach ($cursor as $document) {
 //    var_dump($document);
 //}
-        return view('mongorian.getComplete');
+        return view('mongorian.getComplete',['rows'=>$rows]);
     }
 }

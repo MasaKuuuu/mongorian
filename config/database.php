@@ -77,14 +77,11 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
         ],
-
-        'connections' => [
-          'mongodb' => [
-          'driver' => 'mongodb',
-          'host' => env('DB_HOST', 'localhost'),
-          'port' => env('DB_PORT', 27017),
-          'database' => env('DB_DATABASE', 'testDB'),
-          ],
+        'mongodb' => [
+        'driver' => 'mongodb',
+        'host' => env('DB_HOST', 'localhost'),
+        'port' => env('DB_PORT', 27017),
+        'database' => env('DB_DATABASE', 'testDB'),
         ],
 
     ],
