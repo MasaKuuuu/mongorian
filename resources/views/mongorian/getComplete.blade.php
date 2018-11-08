@@ -17,7 +17,7 @@
         @endforeach
 
 
-        <form method="post" action="/mongorian_laravel/public/getData" enctype="multipart/form-data">
+        <form method="post" action="/getData" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div>
                 <input type="file" name="csvFile">
