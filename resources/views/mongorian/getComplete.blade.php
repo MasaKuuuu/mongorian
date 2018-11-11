@@ -8,30 +8,71 @@
         <title>Laravel</title>
         <script>
         window.onload = insertData;
-
+        var jsonArray = new Array();
+        var json = {};
         @foreach ($rows as $row)
-        console.log('{!!$row!!}');
-            var json = JSON.parse('{!!$row!!}');
+            json = JSON.parse('{!!$row!!}');
+            jsonArray.push(json);
         @endforeach
 
         function insertData(){
             // 既存の table 要素から tbody を取得する
-          var tbody = document.querySelector('table tbody')
-
+          var thead = document.querySelector('table thead');
+          var tbody = document.querySelector('table tbody');
+          var tableColumnFlg = true;
+          var column = document.createElement('tr');
+          var columnId = new Array();
+          var jsonKeyArray = new Array();
           // tbody に tr を入れていく
-          json.forEach(function (row) {
-            console.log(row);
-            var column1 = document.createElement('td')
-            column1.innerText = row.column1
-
-            var column2 = document.createElement('td')
-            column2.innerText = row.column2
-
-            var tr = document.createElement('tr')
-            tr.appendChild(column1)
-            tr.appendChild(column2)
-
-            tbody.appendChild(tr)
+          jsonArray.forEach(function (json) {
+            // カラム追加
+            if(tableColumnFlg){
+              thead.appendChild(column);
+              jsonKeyArray = Object.keys(json);
+              jsonKeyArray.forEach(function(jsonKey){
+              columnId.push(jsonKey);
+                if(jsonKey != "_id"){
+                  var th = document.createElement('th');
+                  th.innerText = jsonKey;
+                  th.id = jsonKey;
+                  column.appendChild(th);
+                }
+              })
+              tableColumnFlg = false;
+            }else{
+              // 定義されていないカラムの取得
+              jsonKeyArray = Object.keys(json);
+              jsonKeyArray.forEach(function(jsonKey){
+                if(columnId.indexOf(jsonKey) < 0){
+                  var th = document.createElement('th');
+                  th.innerText = jsonKey;
+                  th.id = jsonKey;
+                  column.appendChild(th);
+                }
+              })
+            }
+            // データ追加
+            jsonKeyArray.forEach(function(jsonKey){
+              var record = document.createElement('tr');
+              record.id = json['_id'];
+              tbody.appendChild(record);
+              var columnData = document.querySelectorAll('table thead tr th');
+              columnData.forEach(function(columnId){
+                var id = columnId.id;
+                // データ追加
+                if(id != "_id"){
+                  if(id in json){
+                    var data = document.createElement('td');
+                    data.innerText = json[id];
+                    record.appendChild(data);
+                  }else{
+                    var data = document.createElement('td');
+                    data.innerText = "";
+                    record.appendChild(data);
+                  }
+                }
+              })
+            })
           })
         }
 
@@ -40,12 +81,8 @@
     <body>
         <h1>This is Mongorian</h1>
         <p>Create New Collection by MongoDB When you Upload CSV File</p>
-        @foreach ($rows as $row)
-            {{$row}},
-        @endforeach
-        <table>
+        <table border=1>
           <thead>
-            <tr><th>column1</th><th>column2</th></tr>
           </thead>
           <tbody>
           </tbody>
