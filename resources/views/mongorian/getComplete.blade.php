@@ -52,26 +52,24 @@
               })
             }
             // データ追加
-            jsonKeyArray.forEach(function(jsonKey){
-              var record = document.createElement('tr');
-              record.id = json['_id'];
-              tbody.appendChild(record);
-              var columnData = document.querySelectorAll('table thead tr th');
-              columnData.forEach(function(columnId){
-                var id = columnId.id;
-                // データ追加
-                if(id != "_id"){
-                  if(id in json){
-                    var data = document.createElement('td');
-                    data.innerText = json[id];
-                    record.appendChild(data);
-                  }else{
-                    var data = document.createElement('td');
-                    data.innerText = "";
-                    record.appendChild(data);
-                  }
+            var record = document.createElement('tr');
+            record.id = json['_id'];
+            tbody.appendChild(record);
+            var columnData = document.querySelectorAll('table thead tr th');
+            columnData.forEach(function(columnId){
+              var id = columnId.id;
+              // データ追加
+              if(id != "_id"){
+                if(id in json){
+                  var data = document.createElement('td');
+                  data.innerText = json[id];
+                  record.appendChild(data);
+                }else{
+                  var data = document.createElement('td');
+                  data.innerText = "";
+                  record.appendChild(data);
                 }
-              })
+              }
             })
           })
         }
