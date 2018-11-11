@@ -44,6 +44,7 @@
               jsonKeyArray = Object.keys(json);
               jsonKeyArray.forEach(function(jsonKey){
                 if(columnId.indexOf(jsonKey) < 0){
+                  columnId.push(jsonKey);
                   var th = document.createElement('th');
                   th.innerText = jsonKey;
                   th.id = jsonKey;

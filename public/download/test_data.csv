@@ -1,2 +1,2 @@
-ID,name,mailaddr
-1,kuyama,masaki@docomo.ne.jp
+ID,name,mailaddr,age,sex,address
+1,kuyama,masaki@docomo.ne.jp,26,man,OSAKA
