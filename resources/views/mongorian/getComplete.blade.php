@@ -16,42 +16,31 @@
         @endforeach
 
         function insertData(){
-            // 既存の table 要素から tbody を取得する
+          // 既存の table 要素から tbody を取得する
           var thead = document.querySelector('table thead');
           var tbody = document.querySelector('table tbody');
           var tableColumnFlg = true;
-          var column = document.createElement('tr');
+          var columnRecode = document.createElement('tr');
           var columnId = new Array();
           var jsonKeyArray = new Array();
+          var columnList = new Array();
+          @foreach ($columnList as $column)
+              columnList.push('{{$column}}');
+          @endforeach
+
+          // カラム追加
+          thead.appendChild(columnRecode);
+            columnList.forEach(function(column){
+              if(column != "_id"){
+                var th = document.createElement('th');
+                th.innerText = column;
+                th.id = column;
+                columnRecode.appendChild(th);
+              }
+            })
+
           // tbody に tr を入れていく
           jsonArray.forEach(function (json) {
-            // カラム追加
-            if(tableColumnFlg){
-              thead.appendChild(column);
-              jsonKeyArray = Object.keys(json);
-              jsonKeyArray.forEach(function(jsonKey){
-              columnId.push(jsonKey);
-                if(jsonKey != "_id"){
-                  var th = document.createElement('th');
-                  th.innerText = jsonKey;
-                  th.id = jsonKey;
-                  column.appendChild(th);
-                }
-              })
-              tableColumnFlg = false;
-            }else{
-              // 定義されていないカラムの取得
-              jsonKeyArray = Object.keys(json);
-              jsonKeyArray.forEach(function(jsonKey){
-                if(columnId.indexOf(jsonKey) < 0){
-                  columnId.push(jsonKey);
-                  var th = document.createElement('th');
-                  th.innerText = jsonKey;
-                  th.id = jsonKey;
-                  column.appendChild(th);
-                }
-              })
-            }
             // データ追加
             var record = document.createElement('tr');
             record.id = json['_id'];

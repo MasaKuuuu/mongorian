@@ -73,13 +73,23 @@ $options = [
 ];
 // $query = new MongoDB\Driver\Query($filter, $options);
 // $cursor = $manager->executeQuery('study.test', $query);
-$rows = CsvData::all();
+$json = CsvData::all();
+$columnList = array();
+$documents = json_decode($json, true);
 
+foreach ($documents as $key => $value) {
+  $columnList = array_keys($value);
+  foreach ($columnList as $key => $value) {
+    if(!in_array($value, $columnList)){
+      $columnList[] = $value;
+    }
+  }
+}
 
 // Select 結果表示
 //foreach ($cursor as $document) {
 //    var_dump($document);
 //}
-        return view('mongorian.getComplete',['rows'=>$rows]);
+        return view('mongorian.getComplete',['rows'=>$json, 'columnList' => $columnList]);
     }
 }
