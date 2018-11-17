@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
+        <link rel="stylesheet" href="{{asset('css/app.css')}}">
         <script>
         window.onload = insertData;
         var jsonArray = new Array();
@@ -69,7 +70,7 @@
     <body>
         <h1>This is Mongorian</h1>
         <p>Create New Collection by MongoDB When you Upload CSV File</p>
-        <table border=1>
+        <table class="table table-striped">
           <thead>
           </thead>
           <tbody>

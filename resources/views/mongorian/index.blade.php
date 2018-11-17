@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
+        <link rel="stylesheet" href="{{asset('css/app.css')}}">
     </head>
     <body>
         <h1>This is Mongorian</h1>
@@ -15,9 +16,9 @@
             <div>
                 <input type="file" name="csvFile">
             </div>
-            <!-- <div>
+            <div>
                 <input type="text" name="colName">
-            </div> -->
+            </div>
             <div>
                 <input type="submit" value="登録">
             </div>
