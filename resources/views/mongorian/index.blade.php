@@ -15,6 +15,9 @@
             <div>
                 <input type="file" name="csvFile">
             </div>
+            <!-- <div>
+                <input type="text" name="colName">
+            </div> -->
             <div>
                 <input type="submit" value="登録">
             </div>

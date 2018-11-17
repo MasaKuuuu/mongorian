@@ -8,6 +8,7 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 use App\Models\CsvData;
+// use Illuminate\Support\Facades\Schema;
 
 class GetDataController extends Controller
 {
@@ -43,6 +44,10 @@ if(is_uploaded_file($_FILES["csvFile"]["tmp_name"])){
                         }
                     }
                     $asins[] = $csvDataRow;
+                    // Schema::create($request->colName, function($collection)
+                    //   {
+                    //   });
+                    // var_dump($request->colName);
                     CsvData::insert($csvDataRow);
                     // $bulk->insert($csvDataRow);
                     // $manager->executeBulkWrite('study.test', $bulk);
