@@ -7,11 +7,12 @@ use Illuminate\Http\Request;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+use App\Http\Requests\UploadRequest;
 use App\Models\CsvData;
 
 class UploadController extends Controller
 {
-    public function postCSV(Request $request){
+    public function postCSV(UploadRequest $request){
         if($request->hasFile('csvFile')){
             print ($request->csvFile->extension());
             if($request->csvFile->getClientOriginalExtension() != 'csv'){

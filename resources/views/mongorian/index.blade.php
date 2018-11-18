@@ -11,13 +11,19 @@
     <body>
         <h1>This is Mongorian</h1>
         <h2>1. Create New Collection by MongoDB When you Upload CSV File</h2>
-        <form method="post" action="/uploadCSV" enctype="multipart/form-data">
+        @if ($errors->has('csvFile'))
+        <p style="color: red">{{$errors->first('csvFile')}}</p>
+        @endif
+        @if ($errors->has('dataName'))
+        <p style="color: red">{{$errors->first('dataName')}}</p>
+        @endif
+        <form method="post" action="/postCSV" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div>
-                <input type="file" name="csvFile">
+                CSV File<input type="file" name="csvFile">
             </div>
             <div>
-                <input type="text" name="dataName">
+                Data Name<input type="text" name="dataName">
             </div>
             <div>
                 <input type="submit" value="登録">
@@ -28,14 +34,15 @@
         <form method="post" action="/getData">
             {{ csrf_field() }}
             <div>
+            Data Name
                 <select name = "dataName">
                     @foreach ($dataNameList as $dataName)
-                    <option value={{$dataName}} >{{$dataName}}</option>
+                    <option value="{!!$dataName!!}">{{$dataName}}</option>
                     @endforeach
                 </select>
             </div>
             <div>
-                <input type="submit" value="登録">
+            <input type="submit" value="表示">
             </div>
         </form>
     </body>

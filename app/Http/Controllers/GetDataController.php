@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CsvData;
+use App\Http\Requests\GetRequest;
 class GetDataController extends Controller
 {
-    public function get(Request $request){
+    public function get(GetRequest $request){
+
+
+
         $json = CsvData::where('data_name',$request->dataName)->get();
         $columnList = array();
         $documents = json_decode($json, true);

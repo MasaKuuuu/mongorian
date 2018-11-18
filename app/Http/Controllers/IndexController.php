@@ -19,7 +19,7 @@ class IndexController extends Controller
                 $dataNameList[] = $dataName;
             }
         }
-        
+
         return view('mongorian.index',['dataNameList' => $dataNameList]);
     }
 }
