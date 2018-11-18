@@ -20,3 +20,6 @@ Route::get('/','IndexController@index');
 
 // データの受け取り
 Route::post('/getData','GetDataController@get');
+
+// CSVデータの登録
+Route::post('/postCSV','UploadController@postCSV');
