@@ -19,10 +19,10 @@
 Route::get('/','IndexController@index');
 
 // コレクションの全データ取得
-Route::post('/getAll','GetDataController@getAll');
+Route::get('/getAll','GetDataController@getAll');
 
 // コレクション内のデータ取得
-Route::post('/getSelect','GetDataController@getSelect');
+Route::get('/getSelect','GetDataController@getSelect');
 
 // CSVデータの登録
 Route::post('/postCSV','UploadController@postCSV');

@@ -31,7 +31,7 @@
         </form>
 
         <h2>2. View Collection by MongoDB</h2>
-        <form method="post" action="/getAll">
+        <form method="get" action="/getAll">
             {{ csrf_field() }}
             <div>
             Data Name
