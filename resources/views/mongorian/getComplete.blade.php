@@ -53,11 +53,11 @@
               if(id != "_id"){
                 if(id in json){
                   var data = document.createElement('td');
-                  data.innerText = json[id];
+                  data.innerHTML = "<a href='/getSelect?selectKeyword=" +json[id]+ "'>" +json[id]+ "</a>";
                   record.appendChild(data);
                 }else{
                   var data = document.createElement('td');
-                  data.innerText = "";
+                  data.innerHTML  = "<input type='text' name=" +id+ ">";
                   record.appendChild(data);
                 }
               }
@@ -69,22 +69,19 @@
     </head>
     <body>
         <h1>This is Mongorian</h1>
-        <p>Create New Collection by MongoDB When you Upload CSV File</p>
-        <table class="table table-striped">
-          <thead>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
-
-        <form method="post" action="/getData" enctype="multipart/form-data">
-            {{ csrf_field() }}
-            <div>
-                <input type="file" name="csvFile">
-            </div>
-            <div>
-                <input type="submit" value="登録">
-            </div>
+        <p>UPDATE collection of fixed data</p>
+        <form method="post" action="update">
+          {{ csrf_field() }}
+          <h2>{{$dataName}}</h2>
+          <table class="table table-striped">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+          <div>
+              <input type="submit" value="更新">
+          </div>
         </form>
     </body>
 </html>
